@@ -75,17 +75,17 @@ contactForm.addEventListener('submit', (e) => {
     
     // Simple validation
     if (!name || !email || !message) {
-        showNotification('Vui lòng điền đầy đủ thông tin bắt buộc!', 'error');
+        showNotification('Please fill in all required fields!', 'error');
         return;
     }
     
     if (!isValidEmail(email)) {
-        showNotification('Vui lòng nhập email hợp lệ!', 'error');
+        showNotification('Please enter a valid email address!', 'error');
         return;
     }
     
     // Simulate form submission
-    showNotification('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.', 'success');
+    showNotification('Thank you for contacting me! I will respond as soon as possible.', 'success');
     contactForm.reset();
 });
 
@@ -240,10 +240,11 @@ function typeWriter(element, text, speed = 100) {
 document.addEventListener('DOMContentLoaded', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const originalText = heroTitle.innerHTML;
-        setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
-        }, 500);
+        // Disable typing animation to preserve HTML structure
+        // const originalText = heroTitle.innerHTML;
+        // setTimeout(() => {
+        //     typeWriter(heroTitle, originalText, 50);
+        // }, 500);
     }
 });
 
