@@ -2,16 +2,18 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
+}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -30,12 +32,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar background change on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    if (navbar) {
+        if (window.scrollY > 100) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        }
     }
 });
 
@@ -45,10 +49,11 @@ const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
+    
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
+        if (window.scrollY >= (sectionTop - 200)) {
             current = section.getAttribute('id');
         }
     });
@@ -63,31 +68,32 @@ window.addEventListener('scroll', () => {
 
 // Contact form handling
 const contactForm = document.querySelector('.contact-form form');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const name = contactForm.querySelector('input[type="text"]').value;
-    const email = contactForm.querySelector('input[type="email"]').value;
-    const phone = contactForm.querySelector('input[type="tel"]').value;
-    const message = contactForm.querySelector('textarea').value;
-    
-    // Simple validation
-    if (!name || !email || !message) {
-        showNotification('Please fill in all required fields!', 'error');
-        return;
-    }
-    
-    if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address!', 'error');
-        return;
-    }
-    
-    // Simulate form submission
-    showNotification('Thank you for contacting me! I will respond as soon as possible.', 'success');
-    contactForm.reset();
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const name = contactForm.querySelector('input[type="text"]').value;
+        const email = contactForm.querySelector('input[type="email"]').value;
+        const phone = contactForm.querySelector('input[type="tel"]').value;
+        const message = contactForm.querySelector('textarea').value;
+        
+        // Simple validation
+        if (!name || !email || !message) {
+            showNotification('Please fill in all required fields!', 'error');
+            return;
+        }
+        
+        if (!isValidEmail(email)) {
+            showNotification('Please enter a valid email address!', 'error');
+            return;
+        }
+        
+        // Simulate form submission
+        showNotification('Thank you for contacting me! I will respond as soon as possible.', 'success');
+        contactForm.reset();
+    });
+}
 
 // Email validation function
 function isValidEmail(email) {
@@ -210,7 +216,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .testimonial-card, .stat-item');
+    const animateElements = document.querySelectorAll('.service-card, .stat-item');
     
     animateElements.forEach(el => {
         el.style.opacity = '0';
@@ -248,27 +254,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Parallax effect for hero section (disabled for better performance)
+// window.addEventListener('scroll', () => {
+//     const scrolled = window.pageYOffset;
+//     const hero = document.querySelector('.hero');
+//     if (hero) {
+//         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+//     }
+// });
 
 // Counter animation for stats
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
+    const originalText = element.textContent;
+    const hasPlus = originalText.includes('+');
+    const hasPercent = originalText.includes('%');
     
     function updateCounter() {
         start += increment;
         if (start < target) {
-            element.textContent = Math.floor(start);
+            let displayValue = Math.floor(start);
+            if (hasPlus) displayValue += '+';
+            if (hasPercent) displayValue += '%';
+            element.textContent = displayValue;
             requestAnimationFrame(updateCounter);
         } else {
-            element.textContent = target;
+            element.textContent = originalText;
         }
     }
     
@@ -325,31 +337,31 @@ document.querySelectorAll('.service-card').forEach(card => {
     });
 });
 
-// Testimonial card rotation
-let currentTestimonial = 0;
-const testimonialCards = document.querySelectorAll('.testimonial-card');
+// Testimonial card rotation (disabled - no testimonials in current layout)
+// let currentTestimonial = 0;
+// const testimonialCards = document.querySelectorAll('.testimonial-card');
 
-function rotateTestimonials() {
-    testimonialCards.forEach((card, index) => {
-        if (index === currentTestimonial) {
-            card.style.transform = 'scale(1.05)';
-            card.style.zIndex = '10';
-        } else {
-            card.style.transform = 'scale(1)';
-            card.style.zIndex = '1';
-        }
-    });
+// function rotateTestimonials() {
+//     testimonialCards.forEach((card, index) => {
+//         if (index === currentTestimonial) {
+//             card.style.transform = 'scale(1.05)';
+//             card.style.zIndex = '10';
+//         } else {
+//             card.style.transform = 'scale(1)';
+//             card.style.zIndex = '1';
+//         }
+//     });
     
-    currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-}
+//     currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+// }
 
 // Start testimonial rotation if cards exist
-if (testimonialCards.length > 0) {
-    setInterval(rotateTestimonials, 3000);
-}
+// if (testimonialCards.length > 0) {
+//     setInterval(rotateTestimonials, 3000);
+// }
 
 // Add smooth transitions to all interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .service-card, .testimonial-card, .stat-item');
+const interactiveElements = document.querySelectorAll('a, button, .service-card, .stat-item');
 interactiveElements.forEach(element => {
     element.style.transition = 'all 0.3s ease';
 });

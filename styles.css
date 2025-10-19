@@ -95,7 +95,7 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     display: flex;
     align-items: center;
@@ -203,41 +203,51 @@ body {
 /* About Section */
 .about {
     padding: 6rem 0;
-    background: white;
+    background: #f8fafc;
+    position: relative;
+    z-index: 1;
 }
 
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
+.about h2 {
     text-align: center;
-}
-
-.about-text h2 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #1f2937;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text {
+    text-align: center;
 }
 
 .about-text p {
     font-size: 1.1rem;
     color: #6b7280;
-    margin-bottom: 3rem;
     line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 2rem;
 }
 
 .stat-item {
     text-align: center;
     padding: 2rem;
-    background: #f8fafc;
+    background: white;
     border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -260,7 +270,9 @@ body {
 /* Services Section */
 .services {
     padding: 6rem 0;
-    background: #f8fafc;
+    background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .services h2 {
@@ -323,6 +335,8 @@ body {
 .contact {
     padding: 6rem 0;
     background: white;
+    position: relative;
+    z-index: 1;
 }
 
 .contact h2 {
@@ -527,6 +541,10 @@ body {
     .stats {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .about-content {
+        gap: 2rem;
     }
 
     .contact-content {
