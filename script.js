@@ -420,3 +420,282 @@ backToTopButton.addEventListener('mouseleave', () => {
     backToTopButton.style.transform = 'translateY(0)';
     backToTopButton.style.background = '#2563eb';
 });
+
+// Challenge Logic
+let foundLetters = [];
+const targetWord = '11061998';
+const totalLetters = targetWord.length;
+let challengeStarted = false;
+let currentIndex = 0; // Track current position in sequence
+
+function initializeChallenge() {
+    const hiddenLetters = document.querySelectorAll('.hidden-letter');
+    const progressFill = document.getElementById('progress-fill');
+    const progressCount = document.getElementById('progress-count');
+    const specialBtn = document.getElementById('special-surprise-btn');
+    const challengeSection = document.getElementById('challenge-section');
+    const startBtn = document.getElementById('start-challenge-btn');
+    const challengeProgress = document.getElementById('challenge-progress');
+    const challengeHint = document.getElementById('challenge-hint');
+    
+    if (!hiddenLetters.length) return; // Exit if no challenge elements found
+    
+    // Initially hide all letters
+    hiddenLetters.forEach(letter => {
+        letter.style.display = 'none';
+    });
+    
+    // Start button functionality
+    if (startBtn) {
+        startBtn.addEventListener('click', function() {
+            if (!challengeStarted) {
+                startChallenge();
+            }
+        });
+    }
+    
+    function startChallenge() {
+        challengeStarted = true;
+        startBtn.style.display = 'none';
+        challengeProgress.style.display = 'block';
+        challengeHint.style.display = 'block';
+        
+        // Show all hidden letters with animation
+        hiddenLetters.forEach((letter, index) => {
+            setTimeout(() => {
+                letter.style.display = 'inline-block';
+                letter.style.opacity = '0';
+                letter.style.transform = 'scale(0.5)';
+                letter.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    letter.style.opacity = '1';
+                    letter.style.transform = 'scale(1)';
+                }, 100);
+            }, index * 200);
+        });
+    }
+    
+    // Add click listeners to hidden letters
+    hiddenLetters.forEach((letter, index) => {
+        letter.addEventListener('click', function() {
+            if (!challengeStarted) return;
+            
+            const letterValue = this.getAttribute('data-letter');
+            const expectedValue = targetWord[currentIndex];
+            
+            // Check if this is the correct letter in sequence
+            if (letterValue === expectedValue) {
+                foundLetters.push(letterValue);
+                this.classList.add('found');
+                currentIndex++;
+                
+                // Update progress
+                updateProgress();
+                
+                // Show success feedback
+                showClickFeedback(true, letterValue);
+                
+                // Check if challenge is complete
+                if (foundLetters.length === totalLetters) {
+                    completeChallenge();
+                }
+            } else {
+                // Wrong order - show error feedback
+                showClickFeedback(false, letterValue);
+                this.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            }
+        });
+    });
+    
+    function updateProgress() {
+        const progress = (foundLetters.length / totalLetters) * 100;
+        if (progressFill) progressFill.style.width = progress + '%';
+        if (progressCount) progressCount.textContent = foundLetters.length;
+    }
+    
+    function showClickFeedback(isCorrect, value) {
+        const feedback = document.createElement('div');
+        feedback.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: feedbackSlide 0.5s ease;
+        `;
+        
+        if (isCorrect) {
+            feedback.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+            feedback.innerHTML = `✅ Đúng! Số ${value}`;
+        } else {
+            feedback.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
+            feedback.innerHTML = `❌ Sai thứ tự! Cần số ${targetWord[currentIndex]}`;
+        }
+        
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+            feedback.remove();
+        }, 2000);
+    }
+    
+    function completeChallenge() {
+        // Hide all hidden letters with animation
+        hiddenLetters.forEach((letter, index) => {
+            setTimeout(() => {
+                letter.style.transition = 'all 0.5s ease';
+                letter.style.opacity = '0';
+                letter.style.transform = 'scale(0)';
+                
+                setTimeout(() => {
+                    letter.style.display = 'none';
+                }, 500);
+            }, index * 100);
+        });
+        
+        // Hide challenge section after letters disappear
+        setTimeout(() => {
+            if (challengeSection) challengeSection.style.display = 'none';
+        }, 1000);
+        
+        // Show special button with animation
+        if (specialBtn) {
+            specialBtn.style.display = 'inline-block';
+            specialBtn.style.opacity = '0';
+            specialBtn.style.transform = 'scale(0.5)';
+            
+            // Animate button appearance
+            setTimeout(() => {
+                specialBtn.style.transition = 'all 0.8s ease';
+                specialBtn.style.opacity = '1';
+                specialBtn.style.transform = 'scale(1)';
+                specialBtn.classList.add('challenge-completed');
+            }, 1200);
+        }
+        
+        // Show success message
+        setTimeout(() => {
+            showSuccessMessage();
+        }, 1500);
+    }
+    
+    function showSuccessMessage() {
+        const successDiv = document.createElement('div');
+        successDiv.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        successDiv.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                transform: scale(0.8);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+                width: 90%;
+            ">
+                <h2 style="margin: 0 0 1rem 0; font-size: 2rem;">🎉 Chúc mừng!</h2>
+                <p style="margin: 0; font-size: 1.2rem;">Bạn đã tìm thấy ngày sinh bí mật!</p>
+                <div style="
+                    background: rgba(255, 255, 255, 0.2);
+                    border: 2px solid rgba(255, 255, 255, 0.5);
+                    border-radius: 15px;
+                    padding: 1rem;
+                    margin: 1rem 0;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    letter-spacing: 2px;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                ">11061998</div>
+                <p style="margin: 0.5rem 0 1.5rem 0; font-size: 1rem;">Nút Special Surprise đã được mở khóa! 🎁</p>
+                <button id="scroll-to-surprise" style="
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                    border: 2px solid rgba(255, 255, 255, 0.5);
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    margin-top: 1rem;
+                ">🎁 Xem phần thưởng</button>
+            </div>
+        `;
+        
+        document.body.appendChild(successDiv);
+        
+        // Smooth fade in
+        setTimeout(() => {
+            successDiv.style.opacity = '1';
+            const popupContent = successDiv.querySelector('div');
+            popupContent.style.transform = 'scale(1)';
+            
+            // Add scroll button functionality
+            const scrollBtn = successDiv.querySelector('#scroll-to-surprise');
+            if (scrollBtn) {
+                scrollBtn.addEventListener('mouseenter', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.3)';
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                scrollBtn.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.2)';
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                scrollBtn.addEventListener('click', function() {
+                    // Close popup first
+                    successDiv.style.opacity = '0';
+                    popupContent.style.transform = 'scale(0.8)';
+                    
+                    setTimeout(() => {
+                        successDiv.remove();
+                        
+                        // Scroll to special surprise button
+                        const specialBtn = document.getElementById('special-surprise-btn');
+                        if (specialBtn) {
+                            specialBtn.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center' 
+                            });
+                            
+                            // Add highlight effect to button
+                            specialBtn.style.animation = 'pulse-special 1s ease 3';
+                        }
+                    }, 300);
+                });
+            }
+        }, 50);
+        
+        // Popup will only close when user clicks the button
+        // No automatic timeout
+    }
+}
+
+// Initialize challenge when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initializeChallenge();
+});
