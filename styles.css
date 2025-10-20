@@ -766,6 +766,39 @@ body {
     color: #fbbf24;
 }
 
+.special-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.special-link, .anniversary-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #e91e63, #f06292);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.anniversary-link {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.special-link:hover, .anniversary-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+}
+
+.anniversary-link:hover {
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
 .social-links {
     display: flex;
     gap: 1rem;
