@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -20,6 +24,7 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -145,6 +150,113 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="gallery-header" data-aos="fade-up">
+                <h2>Teaching Gallery</h2>
+                <p class="gallery-subtitle">Moments from my English teaching journey</p>
+            </div>
+            
+            <!-- Gallery Tabs -->
+            <div class="gallery-tabs" data-aos="fade-up" data-aos-delay="200">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="all">
+                        <i class="fas fa-th"></i>
+                        <span>All Photos</span>
+                    </button>
+                    <button class="tab-btn" data-tab="classroom">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Classroom</span>
+                    </button>
+                    <button class="tab-btn" data-tab="students">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Students</span>
+                    </button>
+                    <button class="tab-btn" data-tab="activities">
+                        <i class="fas fa-users"></i>
+                        <span>Activities</span>
+                    </button>
+                </div>
+            </div>
+            
+                <!-- Gallery Grid -->
+                <div class="gallery-grid" data-aos="fade-up" data-aos-delay="400">
+                    <!-- All Photos Tab -->
+                    <div class="gallery-content active" id="all">
+                        <div class="gallery-item" data-category="classroom">
+                            <div class="gallery-image">
+                                <img src="image/gallery/SURPRISED_.png" alt="Interactive Learning" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h4>Interactive Learning</h4>
+                                        <p>Engaging students with dynamic teaching methods</p>
+                                    </div>
+                                    <a href="image/gallery/SURPRISED_.png" data-fancybox="gallery" data-caption="Interactive Learning - Engaging students with dynamic teaching methods" class="gallery-link">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Classroom Tab -->
+                    <div class="gallery-content" id="classroom">
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="image/gallery/SURPRISED_.png" alt="Interactive Learning" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h4>Interactive Learning</h4>
+                                        <p>Engaging students with dynamic teaching methods</p>
+                                    </div>
+                                    <a href="image/gallery/SURPRISED_.png" data-fancybox="classroom" data-caption="Interactive Learning - Engaging students with dynamic teaching methods" class="gallery-link">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Students Tab -->
+                    <div class="gallery-content" id="students">
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="image/gallery/SURPRISED_.png" alt="Student Engagement" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h4>Student Engagement</h4>
+                                        <p>Students actively participating in learning activities</p>
+                                    </div>
+                                    <a href="image/gallery/SURPRISED_.png" data-fancybox="students" data-caption="Student Engagement - Students actively participating in learning activities" class="gallery-link">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activities Tab -->
+                    <div class="gallery-content" id="activities">
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="image/gallery/SURPRISED_.png" alt="Learning Activities" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h4>Learning Activities</h4>
+                                        <p>Interactive learning sessions and group activities</p>
+                                    </div>
+                                    <a href="image/gallery/SURPRISED_.png" data-fancybox="activities" data-caption="Learning Activities - Interactive learning sessions and group activities" class="gallery-link">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -200,6 +312,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -226,6 +339,200 @@
         </div>
     </footer>
 
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Gallery Tab Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const galleryContents = document.querySelectorAll('.gallery-content');
+            let isTransitioning = false;
+            
+            // Function to adjust grid layout based on number of items
+            function adjustGridLayout(content) {
+                const items = content.querySelectorAll('.gallery-item');
+                const itemCount = items.length;
+                
+                // Remove existing classes
+                content.classList.remove('single-item', 'two-items');
+                
+                if (itemCount === 1) {
+                    content.classList.add('single-item');
+                } else if (itemCount === 2) {
+                    content.classList.add('two-items');
+                }
+            }
+            
+            // Adjust layout for all gallery contents on load
+            galleryContents.forEach(adjustGridLayout);
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Prevent multiple rapid clicks
+                    if (this.classList.contains('active') || isTransitioning) return;
+                    
+                    isTransitioning = true;
+                    
+                    // Remove active class from all buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Hide all contents with smooth transition
+                    galleryContents.forEach(content => {
+                        content.style.transition = 'opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease';
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show target content with delay to prevent flicker
+                    setTimeout(() => {
+                        const targetContent = document.getElementById(targetTab);
+                        if (targetContent) {
+                            targetContent.style.transition = 'opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease';
+                            targetContent.classList.add('active');
+                            // Adjust layout for the new content
+                            adjustGridLayout(targetContent);
+                        }
+                    }, 50);
+                    
+                    // Reset transition lock
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 400);
+                });
+            });
+        });
+        
+        // Fancybox Configuration
+        Fancybox.bind("[data-fancybox]", {
+            // General options
+            groupAttr: "data-fancybox",
+            mainClass: "fancybox-custom",
+            closeButton: "top",
+            backFocus: false,
+            trapFocus: false,
+            autoFocus: false,
+            placeFocusBack: false,
+            
+            // Animation options - Ultra smooth transitions
+            animationEffect: "fade",
+            animationDuration: 500,
+            transitionEffect: "slide",
+            transitionDuration: 600,
+            
+            // Advanced transition options
+            transitionDuration: 600,
+            animationDuration: 500,
+            showClass: "fadeIn",
+            hideClass: "fadeOut",
+            
+            // UI options
+            showClass: "fadeIn",
+            hideClass: "fadeOut",
+            clickOutside: "close",
+            clickSlide: "close",
+            dragToClose: true,
+            
+            // Keyboard shortcuts
+            keyboard: {
+                Escape: "close",
+                Delete: "close",
+                Backspace: "close",
+                PageUp: "next",
+                PageDown: "prev",
+                ArrowRight: "next",
+                ArrowLeft: "prev",
+                ArrowUp: "next",
+                ArrowDown: "prev",
+                Home: "first",
+                End: "last"
+            },
+            
+            // Image options
+            Image: {
+                zoom: true,
+                wheel: "zoom",
+                click: "toggleZoom",
+                fit: "contain",
+                cover: true
+            },
+            
+            // Toolbar options
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: ["zoomIn", "zoomOut", "rotateCCW", "rotateCW", "flipX", "flipY"],
+                    right: ["slideshow", "thumbs", "close"]
+                }
+            },
+            
+            // Thumbs options
+            Thumbs: {
+                autoStart: false,
+                hideOnClose: true
+            },
+            
+            // Caption options
+            caption: function(instance, slide) {
+                return slide.caption || "";
+            },
+            
+            // Smooth transitions and effects
+            on: {
+                "close": function(instance) {
+                    // Force immediate close
+                    instance.destroy();
+                },
+                "init": function(instance) {
+                    // Add immediate close on button click
+                    instance.on("click", ".fancybox__button--close", function() {
+                        instance.destroy();
+                    });
+                    
+                    // Add ultra smooth transition effects
+                    instance.on("change", function(instance, slide) {
+                        // Add smooth transition class
+                        const slides = instance.container.querySelectorAll('.fancybox__slide');
+                        slides.forEach(slide => {
+                            slide.classList.add('is-transitioning');
+                            setTimeout(() => {
+                                slide.classList.remove('is-transitioning');
+                            }, 600);
+                        });
+                        
+                        // Add smooth backdrop transition
+                        const backdrop = instance.container.querySelector('.fancybox__backdrop');
+                        if (backdrop) {
+                            backdrop.style.transition = 'all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        }
+                    });
+                    
+                    // Add smooth loading effects
+                    instance.on("load", function(instance, slide) {
+                        const currentSlide = instance.container.querySelector('.fancybox__slide.is-current');
+                        if (currentSlide) {
+                            currentSlide.classList.add('is-loaded');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
