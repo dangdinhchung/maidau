@@ -1625,30 +1625,95 @@ html {
 
 /* Responsive Gallery */
 @media (max-width: 768px) {
+    .gallery {
+        padding: 2rem 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .gallery-grid {
+        width: 100%;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+    
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-header h2 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .gallery-subtitle {
+        font-size: 1.1rem;
+    }
+    
     .gallery-content {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1.5rem;
+        justify-items: center;
+    }
+    
+    .gallery-item {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Force single column layout on tablet */
+    .gallery-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .gallery-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
     
     .gallery-image {
-        height: 220px;
-        aspect-ratio: 4/3;
+        width: 100% !important;
+        height: 250px !important;
+        aspect-ratio: 4/3 !important;
     }
     
+    .gallery-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    
+    
     .gallery-placeholder {
-        height: 220px;
+        height: 250px;
         aspect-ratio: 4/3;
     }
     
     .tab-nav {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         gap: 0.5rem;
-        padding: 1.5rem;
+        padding: 1rem;
+        justify-content: center;
     }
     
     .tab-btn {
-        padding: 0.8rem 1.5rem;
+        padding: 0.8rem 1.2rem;
         font-size: 0.9rem;
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+    
+    .tab-btn span {
+        display: none;
     }
     
     .gallery-info h4 {
@@ -1684,32 +1749,68 @@ html {
 }
 
 @media (max-width: 480px) {
-    .gallery-content {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .gallery {
+        padding: 1.5rem 0.2rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .gallery-grid {
+        width: 100%;
+        padding: 0 0.2rem;
+        box-sizing: border-box;
     }
     
     .gallery-header h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
     }
     
     .gallery-subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .gallery-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        justify-items: center;
+    }
+    
+    .gallery-item {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 0.8rem;
+        display: block;
     }
     
     .gallery-image {
-        height: 200px;
+        height: 220px;
         aspect-ratio: 4/3;
+        width: 100%;
+    }
+    
+    .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     
     .gallery-placeholder {
-        height: 200px;
+        height: 220px;
         aspect-ratio: 4/3;
     }
     
+    .tab-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
     .tab-btn {
-        padding: 0.6rem 1.2rem;
+        padding: 0.6rem 1rem;
         font-size: 0.8rem;
+        width: 100%;
+        justify-content: center;
     }
     
     .tab-btn span {
@@ -1729,7 +1830,39 @@ html {
         font-size: 0.9rem;
     }
     
-    /* Lightbox mobile styles */
+    .gallery-link i {
+        font-size: 1rem;
+    }
+    
+    /* Force single column layout on mobile */
+    .gallery-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .gallery-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .gallery-image {
+        width: 100% !important;
+        height: 220px !important;
+        aspect-ratio: 4/3 !important;
+    }
+    
+    .gallery-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+}
+
+/* Lightbox mobile styles */
     .lb-data .lb-close {
         top: 5px !important;
         right: 5px !important;
