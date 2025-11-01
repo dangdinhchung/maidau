@@ -134,6 +134,7 @@
             height: 350px;
             cursor: pointer;
             perspective: 1200px;
+            padding-bottom: 1rem;
         }
 
         .envelope {
@@ -731,7 +732,10 @@
         }
 
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
             padding: 1rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
@@ -745,6 +749,17 @@
             overflow: hidden;
         }
 
+        .btn i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn:hover i {
+            transform: scale(1.2);
+        }
+
         .btn::before {
             content: '';
             position: absolute;
@@ -753,25 +768,41 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.4);
             transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .btn:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 100% 100%;
             color: white;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            position: relative;
+            z-index: 1;
         }
 
         .btn-primary:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 100% 100%;
             transform: translateY(-3px);
             box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:hover::before {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary {
@@ -785,10 +816,6 @@
             box-shadow: 0 8px 30px rgba(240, 147, 251, 0.6);
         }
 
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
 
         /* Back Button */
         .back-button {
@@ -1194,6 +1221,7 @@
                 max-width: 380px;
                 height: 320px;
                 padding: 1rem;
+                padding-bottom: 1.5rem;
             }
 
             .envelope-body {
@@ -1220,7 +1248,7 @@
             .click-to-open {
                 font-size: 1rem;
                 padding: 0.9rem 2rem;
-                bottom: 1.2rem;
+                bottom: 2rem;
             }
 
             .envelope-flap::before {
@@ -1253,6 +1281,7 @@
             .envelope-container {
                 width: 85%;
                 height: 300px;
+                padding-bottom: 1.5rem;
             }
 
             .envelope-body {
@@ -1278,7 +1307,7 @@
             .click-to-open {
                 font-size: 0.95rem;
                 padding: 0.8rem 1.8rem;
-                bottom: 1rem;
+                bottom: 2rem;
             }
 
             .envelope-flap::before {
@@ -1333,22 +1362,44 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .countdown-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.6rem;
             }
 
             .countdown-item {
-                padding: 1rem;
+                padding: 1rem 0.6rem;
             }
 
             .countdown-number {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 0.4rem;
             }
 
             .countdown-label {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+
+            .countdown-item {
+                padding: 0.8rem 0.5rem;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .countdown-label {
+                font-size: 0.65rem;
+                letter-spacing: 0;
             }
         }
     </style>
@@ -1466,8 +1517,9 @@
 
             <!-- Buttons -->
             <div class="button-group">
-                <a href="#event" class="btn btn-primary">
-                    <span>Xem chi tiết</span>
+                <a href="https://maps.app.goo.gl/Ko31sYoqtYaPtRyr9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Xem địa chỉ trên bản đồ</span>
                 </a>
                 <a href="../index.html" class="btn btn-secondary">
                     <span>Về trang chủ</span>
